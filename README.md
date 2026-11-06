@@ -21,6 +21,8 @@ Without Supabase environment variables, the app runs in local demo mode and pers
 
 The migration provides foreign keys, one-active-survey enforcement, RLS, and atomic RPCs for activation and anonymous submission. Never expose a Supabase service-role key in the browser.
 
+If an existing Supabase project reports `function gen_random_bytes(integer) does not exist` when activating, run the migration's `activate_survey` function definition again after changing `gen_random_bytes` to `extensions.gen_random_bytes`. The current migration already uses the qualified function name.
+
 ## Deploy with Cloudflare Pages
 
 ```bash

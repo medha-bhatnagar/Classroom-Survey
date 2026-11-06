@@ -5,7 +5,7 @@ create table if not exists surveys (
   title text not null,
   description text,
   status text not null default 'draft' check (status in ('draft','active','closed','archived')),
-  public_slug text unique not null default encode(gen_random_bytes(5), 'hex'),
+  public_slug text unique not null default encode(extensions.gen_random_bytes(5), 'hex'),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -66,7 +66,7 @@ declare result surveys;
 begin
   if auth.uid() is null then raise exception 'AUTHENTICATION_REQUIRED'; end if;
   update surveys set status = 'closed' where status = 'active' and id <> p_survey_id;
-  update surveys set status = 'active', public_slug = coalesce(public_slug, encode(gen_random_bytes(5), 'hex')) where id = p_survey_id returning * into result;
+  update surveys set status = 'active', public_slug = coalesce(public_slug, encode(extensions.gen_random_bytes(5), 'hex')) where id = p_survey_id returning * into result;
   if result.id is null then raise exception 'SURVEY_NOT_FOUND'; end if;
   return result;
 end; $$;
