@@ -98,5 +98,11 @@ export async function getResults(survey: Survey): Promise<{ responseCount: numbe
   if (answerError) throw answerError;
   return { responseCount: responses?.length ?? 0, questions: survey.questions.map(q => ({ question_id: q.id, question_text: q.question_text, response_count: responses?.length ?? 0, choices: q.choices.map(c => { const count = (answers ?? []).filter(a => a.question_id === q.id && a.choice_id === c.id).length; return { choice_id: c.id, choice_text: c.choice_text, count, percentage: responses?.length ? Math.round(count / responses.length * 1000) / 10 : 0 }; }) })) };
 }
+export async function getResponseCount(surveyId: string): Promise<number> {
+  if (!supabase) return (demoState().answers[surveyId] ?? []).length;
+  const { count, error } = await supabase.from('responses').select('id', { count: 'exact', head: true }).eq('survey_id', surveyId);
+  if (error) throw error;
+  return count ?? 0;
+}
 export function newQuestion(surveyId = ''): Question { return { id: id(), survey_id: surveyId, question_text: '', question_type: 'multiple_choice', position: 0, choices: [{ id: id(), question_id: '', choice_text: '', position: 0 }, { id: id(), question_id: '', choice_text: '', position: 1 }] }; }
 export function newSurvey(): Survey { return { id: id(), title: '', description: '', status: 'draft', public_slug: slug(), created_at: new Date().toISOString(), questions: [newQuestion()] }; }

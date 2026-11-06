@@ -20,3 +20,12 @@ Without Supabase environment variables, the app runs in local demo mode and pers
 4. When the environment variables are present, the login page automatically uses `supabase.auth.signInWithPassword`; without them it stays in local demo mode.
 
 The migration provides foreign keys, one-active-survey enforcement, RLS, and atomic RPCs for activation and anonymous submission. Never expose a Supabase service-role key in the browser.
+
+## Deploy with Cloudflare Pages
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name classroom-survey
+```
+
+Configure `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in Cloudflare Pages before production builds. The `public/_redirects` file keeps client-side routes working on refresh.

@@ -24,7 +24,7 @@ This roadmap breaks the implementation into small, testable phases ordered from 
 
 # Phase 2 — Supabase Project and Database
 
-- [ ] Create a Supabase project.
+- [x] Create a Supabase project.
 - [x] Create the `surveys` table.
 - [x] Create the `questions` table.
 - [x] Create the `choices` table.
@@ -47,7 +47,7 @@ This roadmap breaks the implementation into small, testable phases ordered from 
 - [x] Create the instructor login page.
 - [x] Connect login to Supabase Auth.
 - [x] Add logout.
-- [x] Create an authentication context/provider.
+- [ ] Create an authentication context/provider.
 - [x] Create a protected-route component.
 - [x] Redirect unauthenticated users to login.
 - [x] Show the logged-in instructor in the dashboard.
@@ -64,7 +64,7 @@ This roadmap breaks the implementation into small, testable phases ordered from 
 - [x] Add Edit action.
 - [x] Add Duplicate action.
 - [x] Add Delete action.
-- [x] Add Archive action.
+- [ ] Add Archive action.
 - [x] Add View Results action.
 - [x] Add Activate action.
 - [x] Add Close action.
@@ -144,7 +144,7 @@ This roadmap breaks the implementation into small, testable phases ordered from 
 - [x] Aggregate answers by question.
 - [x] Show counts for each choice.
 - [x] Show percentages for each choice.
-- [x] Add bar charts using Recharts.
+- [ ] Add bar charts using Recharts.
 - [x] Clearly label unanswered questions.
 - [x] Add Refresh Results button.
 - [x] Add link back to the main dashboard.
@@ -155,7 +155,7 @@ This roadmap breaks the implementation into small, testable phases ordered from 
 
 - [x] Allow viewing results for Closed surveys.
 - [x] Allow viewing results for Archived surveys.
-- [x] Add filtering by date.
+- [ ] Add filtering by date.
 - [x] Add filtering by survey title.
 - [x] Preserve all historical response data.
 
