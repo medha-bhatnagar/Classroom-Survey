@@ -39,7 +39,8 @@ export async function saveSurvey(input: Pick<Survey, 'id' | 'title' | 'descripti
   }
   const { data: survey, error } = await supabase.from('surveys').upsert({ id: input.id || undefined, title: input.title, description: input.description, status: 'draft' }).select().single();
   if (error) throw error;
-  await supabase.from('questions').delete().eq('survey_id', survey.id);
+  const { error: deleteError } = await supabase.from('questions').delete().eq('survey_id', survey.id);
+  if (deleteError) throw deleteError;
   for (const [qi, q] of cleanQuestions.entries()) {
     const { data: question, error: questionError } = await supabase.from('questions').insert({ survey_id: survey.id, question_text: q.question_text, question_type: q.question_type, position: qi }).select().single();
     if (questionError) throw questionError;
